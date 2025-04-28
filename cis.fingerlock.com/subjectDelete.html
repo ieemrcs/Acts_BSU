@@ -1,0 +1,12 @@
+<?php
+
+$myID = $_GET['ID'];
+if($myID != "")
+{
+    include('includes/connect.html');
+    $query = "DELETE FROM tbl_subjects WHERE ID = $myID";
+    $result = $conn->query($query);
+    header('location: subject_dashboard.html');
+}
+
+?>

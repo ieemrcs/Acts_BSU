@@ -1,0 +1,113 @@
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info</title>
+
+        <title>Students</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <style>
+          /* Chrome, Safari, Edge, Opera */
+          input::-webkit-outer-spin-button,
+          input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        </style>
+</head>
+
+<style>
+.wrapper{
+  margin: auto;
+  overflow: hidden;
+  max-width: 650px;
+  background: #fff;
+  padding: 10px 30px 10px 30px;
+  border-radius: 5px;
+  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+  margin-top: 8px;
+}
+</style>
+
+<body>
+<div>
+  <header>
+    <h2 class="logo text-white"><img src="images/CIS Fingerlock Logo.png" alt="Logo" style="width:50px; height: 50px;" class="rounded-pill"> CIS Fingerlock</h2>
+    <nav class="navigation">
+      <a href="teacher_dashboard.html">Dashboard</a>
+      <a href="teacherSchedule_dashboard.html">Attendance Sheet</a>
+      <a href="index.html">Sign Out</a> 
+    </nav>
+  </header>
+</div>
+
+<div class="wrapper">
+    <div class="title-text">
+      <div class="title signup" style="font-weight: 1000;">STUDENT INFORMATION</div>
+    </div>
+    <div class="row" style="font-weight: 1000; font-size: x-large;">
+      <div class="col">BSIT 1B - IT 115.1</div>
+      <div class="col-sm-3" id="date">
+        <script>
+            n =  new Date();
+            y = n.getFullYear();
+            m = n.getMonth() + 1;
+            d = n.getDate();
+            document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+        </script>
+      </div>
+    </div>
+    <hr>  
+
+    <div class="row" style="font-weight: 1000;">
+      <div class="col">STUDENT ID</div>
+      <div class="col">NAME</div>
+      <div class="col" style="text-align: center;">FINGERPRINT</div>
+      <div class="col" style="text-align: center;">STATUS</div>
+    </div>
+    <hr>
+        <div class="row">
+          <div class="col">04</div>
+          <div class="col">Delio, Sean Myrh</div>
+          <div class="col" style="text-align: center;">
+            <img src="images/fingerprint_extended.jpg" style="border: solid black 1px; width: 110px; height: 40px;">
+          </div>
+          <div class="col" style="text-align: center;">
+            On Time
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">16</div>
+            <div class="col">Rufino, Dexter</div>
+            <div class="col" style="text-align: center;">
+              <img src="images/fingerprint_extended.jpg" style="border: solid black 1px; width: 110px; height: 40px;">
+            </div>
+            <div class="col" style="text-align: center;">
+              Late
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">23</div>
+            <div class="col">Soriano, Lee Marcus</div>
+            <div class="col" style="text-align: center;">
+              <img src="images/fingerprint_extended.jpg" style="border: solid black 1px; width: 110px; height: 40px;">
+            </div>
+            <div class="col" style="text-align: center;">
+              Absent
+            </div>
+          </div>
+          <hr>
+          <div class="col-sm-2" style="height: 38px; margin-left: 13.5rem; margin-right: auto;" > 
+            <a href="teacherFingerprint_scan.html">
+              <input type="button" class="btn btn-success" value="Scan Fingerprint" name="btnSave" style="width: 170px">    
+            </a>  
+          </div>
+</div>
+</body>
+</html>

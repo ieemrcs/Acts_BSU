@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingerprint Input</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: gray;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .fingerprint-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .fingerprint-icon {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fingerprint-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .message {
+            margin-top: 20px;
+        }
+
+        .ad-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 80%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 9.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .ad-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            max-width: 100%;
+            max-height: 100%;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h2{
+            text-align:center;
+            position: unset;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="fingerprint-container">
+        
+        <h2>Fingerprint Authentication</h2>
+        <div class="fingerprint-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+            </svg>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+        <p class="message">Place your finger on the sensor.</p>
+        <button onclick="history.back()">Go Back</button>
+    </div>
+
+    <div class="ad-container">
+        <div class="ad-content">
+            <h3>Advertisement</h3>
+            <p>This is a sample advertisement</p>
+            <div class="ad-content">
+                <h3>Advertisement</h3>
+                <video id="adVideo" width="350" height="250" src="ads.mp4" title="dancing alien meme" autoplay muted controls></video><br>
+                <button id="unmuteBtn" onclick="unmuteVideo()">Enable Sound</button>
+                <br><br>
+                <span id="countdown">5</span> seconds
+            </div>
+            
+            <script>
+            function unmuteVideo() {
+                const video = document.getElementById('adVideo');
+                video.muted = false;
+                document.getElementById('unmuteBtn').style.display = 'none';
+                video.play().catch(e => console.log('Playback failed:', e));
+            }
+            </script>
+    </div>
+
+    <script>
+        const progressBarFill = document.querySelector('.progress-bar-fill');
+        const message = document.querySelector('.message');
+
+        let scanProgress = 0;
+        const scanInterval = setInterval(() => {
+            scanProgress += 20;
+            progressBarFill.style.width = scanProgress + '%';
+
+            if (scanProgress >= 100) {
+                clearInterval(scanInterval);
+                message.textContent = 'Fingerprint recognized!';
+                
+                
+                const adContainer = document.querySelector('.ad-container');
+                const countdownElement = document.getElementById('countdown');
+                adContainer.style.display = 'block';
+                
+                
+                let secondsLeft = 5;
+                const countdownInterval = setInterval(() => {
+                    secondsLeft--;
+                    countdownElement.textContent = secondsLeft;
+                    
+                    if (secondsLeft <= 0) {
+                        clearInterval(countdownInterval);
+                        adContainer.style.display = 'none';
+                    }
+                }, 1000);
+            }
+        }, 100); 
+    </script>
+
+    <script>
+        function switchTab(tabName) {
+            
+            document.querySelectorAll('.login-content').forEach(content => {
+                content.classList.remove('active');
+            });
+         
+            document.getElementById(tabName + '-login').classList.add('active');
+            
+           
+            document.querySelectorAll('.login-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+            showAd();
+            return false;
+        }
+
+        function showAd() {
+            const overlay = document.getElementById('ad-overlay');
+            const countdown = document.getElementById('countdown');
+            overlay.style.display = 'flex';
+            
+            let seconds = 120;
+            countdown.textContent = seconds;
+            
+            const timer = setInterval(() => {
+                seconds--;
+                countdown.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    overlay.style.display = 'none';
+                    
+                    const activeForm = document.querySelector('.login-content.active form');
+                    if (activeForm) {
+                        activeForm.submit();
+                    }
+                }
+            }, 1000);
+        }
+
+    
+        document.querySelectorAll('button[type="submit"]').forEach(button => {
+            button.addEventListener('click', handleSignIn);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingerprint Input</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: gray;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .fingerprint-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .fingerprint-icon {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fingerprint-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .message {
+            margin-top: 20px;
+        }
+
+        h2{
+            text-align:center;
+            position: unset;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="fingerprint-container">
+        
+        <h2>Fingerprint Authentication</h2>
+        <div class="fingerprint-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+            </svg>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+        <p class="message">Place your finger on the sensor.</p>
+        <button onclick="history.back()">Go Back</button>
+    </div>
+
+    <script>
+        const progressBarFill = document.querySelector('.progress-bar-fill');
+        const message = document.querySelector('.message');
+
+        let scanProgress = 0;
+        const scanInterval = setInterval(() => {
+            scanProgress += 20;
+            progressBarFill.style.width = scanProgress + '%';
+
+            if (scanProgress >= 100) {
+                clearInterval(scanInterval);
+                message.textContent = 'Fingerprint recognized!';
+            }
+        }, 100); 
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+1. Start
+2. Initialize libraries and variables
+3. Input grid dimensions (width, height)
+4. Create grid and state grid
+5. Input cell specification method (1: specify, 2: random)
+6. If method is 1:
+   - Input number of live cells
+   Else:
+   - Generate random number of live cells
+7. Input generation specification method (1: specify, 2: random)
+8. If method is 1:
+   - Input number of generations
+   Else:
+   - Generate random number of generations
+9. Input mode (a: automatic, p: pause)
+10. Set speed for automatic mode
+11. While running and generation <= generations:
+    a. Print current generation and grid
+    b. Update grid based on Game of Life rules
+    c. If mode is p:
+       - Wait for user input to continue
+    d. Else:
+       - Sleep for specified speed
+12. End
